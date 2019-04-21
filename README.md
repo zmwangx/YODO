@@ -2,6 +2,7 @@
 
 ![Python 3.6, 3.7](https://img.shields.io/badge/python-3.6,%203.7-blue.svg?maxAge=86400)
 ![Powered by Flask](https://img.shields.io/badge/powered%20by-Flask-blue.svg?logo=flask&maxAge=86400)
+[![CircleCI](https://img.shields.io/circleci/project/github/zmwangx/YODO.svg)](https://circleci.com/gh/zmwangx/YODO)
 
 YODO (pronounced *you&middot;dough*) is a dead simple, database-less ephemeral file hosting service powered by Flask.
 
