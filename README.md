@@ -10,6 +10,18 @@ You upload a file via a POST request; you receive a URL as response; you get to 
 
 **Security isn't a primary concern of this app. Don't host it on the public Internet!**
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Contents
+
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Environment variables](#environment-variables)
+- [Motivation](#motivation)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Usage
 
 Usage instructions (reproduced below) can be accessed at the root of the service via a GET request:
@@ -68,6 +80,11 @@ is available if filename was specified at upload time.
 A sample gunicorn + systemd deployment setup is shown in [`etc/gunicorn-systemd.service`](etc/gunicorn-systemd.service).
 
 Again, do NOT deploy this to a public facing network.
+
+## Environment variables
+
+- `STATE_DIRECTORY`: required. Absolute path to the directory for file storage. This directory should support atomic file creation and renaming.
+- `MAX_CONTENT_LENGTH`: optional, defaults to 10,485,760 (10MiB). The server rejects larger requests with 413 Request Entity Too Large.
 
 ## Motivation
 
