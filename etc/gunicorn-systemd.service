@@ -1,0 +1,23 @@
+# Systemd configuration for gunicorn@yodo.localhost.service.
+
+[Unit]
+Description=gunicorn daemon for yodo.localhost
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+StateDirectory=gunicorn@yodo.localhost
+WorkingDirectory=/path/to/yodo/directory
+PrivateTmp=true
+# - Gunicorn allows multiple --bind directives. Here I'm binding to both
+#   loopback (lo) and docker0, so that bridged containers can access the
+#   service too.
+# - STATE_DIRECTORY environment variable should be set automatically on
+#   systemd version 240 or later (Ubuntu Disco, Debian Buster).
+ExecStart=/usr/local/bin/gunicorn --bind 127.0.0.1:14641 --bind 172.17.0.1:14641 --env STATE_DIRECTORY=/var/lib/gunicorn@yodo.localhost --name yodo.localhost app:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
